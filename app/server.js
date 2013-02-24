@@ -17,7 +17,6 @@ var twilioClient = require('twilio')('ACceb22beac0d0c3ca5337f63739a1fbe3', 'f6a7
 var music = require('./lib/music.js')(rdio, Models);
 
 
-
 // Create our app
 var app = express.createServer(express.logger());
 app.use(express.bodyParser());
@@ -26,9 +25,21 @@ app.set('view engine', 'mustache');
 app.set('view options', { layout: false });
 app.register('.mustache', stache);
 
+// Socket.io
+var io = require('socket.io').listen(app);
+
+app.get('/add-track', function (request, response) {
+  io.sockets.emit('track-create', {name: "eli"});
+  response.send(200);
+});
+
 app.get('/', function(request, response) {
 	// response.send( 'hi!' );
 	response.render('index');
+});
+
+app.get('/playlist', function (request, response) {
+  response.render('playlist');
 });
 
 app.get('/token', function(request, response) {
