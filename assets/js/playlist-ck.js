@@ -1,0 +1,1 @@
+$(document).ready(function(){$(window).scroll(function(){$(this).scrollTop()>=130?$("#hidden").fadeIn():$("#hidden").fadeOut()})});

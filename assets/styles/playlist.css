@@ -1,0 +1,310 @@
+/* COLORS */
+/* FONTS */
+@font-face {
+  font-family: ProximaNovaLight;
+  src: url("../fonts/ProximaNova-Light.otf");
+  /* url('ProximaNova-Light.otf');  IE9 */ }
+
+body, html {
+  padding: 0;
+  margin: 0;
+  font-family: ProximaNovaLight;
+  height: 100%; }
+
+body {
+  background-image: url("../images/grey.png");
+  background-image: url("../images/grey.png");
+  background-image: url("../images/grey.png");
+  background-image: url("../images/grey.png");
+  background-image: url("../images/grey.png");
+  background-repeat: repeat-all; }
+
+#nav {
+  width: 100%;
+  top: 0;
+  position: fixed;
+  height: 80px;
+  padding: 5px;
+  display: block;
+  z-index: 1;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+  #nav #logo {
+    text-decoration: none;
+    color: #DDD;
+    font-size: 65px;
+    line-height: 75px;
+    float: left;
+    margin-left: 50px;
+    font-weight: 400; }
+    #nav #logo span {
+      color: RGBa(158, 202, 59, 0.9); }
+
+#hidden {
+  width: 260px;
+  position: fixed;
+  height: 160px;
+  left: 10px;
+  top: 90px;
+  background: RGBa(60, 60, 60, 0.95);
+  padding: 10px;
+  display: none;
+  color: #EEE;
+  border-radius: 4px;
+  border: 3px solid #222222; }
+  #hidden img {
+    width: 70px;
+    height: 70px;
+    float: left; }
+  #hidden #current_info {
+    padding: 10px;
+    float: left; }
+    #hidden #current_info h3 {
+      display: block;
+      padding: 0;
+      margin: 0 0 10px 0;
+      font-size: 22px;
+      float: left;
+      max-width: 200px; }
+    #hidden #current_info h4 {
+      padding: 0;
+      margin: 0;
+      font-size: 18px;
+      float: left;
+      max-width: 200px; }
+  #hidden #nav_buttons {
+    float: left;
+    margin-top: 10px;
+    margin-left: 40px;
+    display: block;
+    position: relative; }
+    #hidden #nav_buttons #nav_back, #hidden #nav_buttons #nav_next {
+      width: 50px;
+      height: 50px;
+      background: grey;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 -6px;
+      border: 2px solid #222222;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      -webkit-box-shadow: inset 0 -4px 30px 1px rgba(12, 12, 12, 0.95), inset 0 -1px 20px 1px RGBa(30, 30, 30, 0.9);
+      box-shadow: inset 0 -4px 30px 1px rgba(12, 12, 12, 0.95), inset 0 -1px 20px 1px RGBa(30, 30, 30, 0.9); }
+      #hidden #nav_buttons #nav_back:hover, #hidden #nav_buttons #nav_next:hover {
+        background: #555; }
+      #hidden #nav_buttons #nav_back img, #hidden #nav_buttons #nav_next img {
+        width: 20px;
+        height: 20px;
+        margin: 15px 5px 15px 15px;
+        opacity: .5; }
+    #hidden #nav_buttons #nav_play {
+      display: inline-block;
+      background: grey;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      border: 3px solid #222222;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      -webkit-box-shadow: inset 0 -4px 30px 1px rgba(12, 12, 12, 0.95), inset 0 -1px 20px 1px RGBa(30, 30, 30, 0.9);
+      box-shadow: inset 0 -4px 30px 1px rgba(12, 12, 12, 0.95), inset 0 -1px 20px 1px RGBa(30, 30, 30, 0.9); }
+      #hidden #nav_buttons #nav_play:hover {
+        background: #555; }
+      #hidden #nav_buttons #nav_play img {
+        width: 40px;
+        height: 40px;
+        margin: 15px 5px 0 20px;
+        opacity: .5; }
+
+#current {
+  height: 200px;
+  width: 800px;
+  margin: 30px auto 0px auto;
+  padding: 10px;
+  border-left: 5px solid RGBa(10, 10, 10, 0.7);
+  border-right: 5px solid RGBa(10, 10, 10, 0.7);
+  border-top: 5px solid RGBa(10, 10, 10, 0.7);
+  display: block;
+  background: RGBa(60, 60, 60, 0.95); }
+  #current img {
+    width: 190px;
+    height: 190px;
+    float: left; }
+  #current #info {
+    color: #dddddd;
+    display: block;
+    margin-left: 30px;
+    float: left; }
+    #current #info h2 {
+      font-size: 30px;
+      display: block;
+      width: 100%;
+      padding: 10px 0 0 0;
+      margin: 0 0 10px 0; }
+    #current #info h3 {
+      font-size: 24px;
+      display: block;
+      width: 100%;
+      padding: 0;
+      margin: 0; }
+  #current #buttons {
+    width: 210px;
+    height: 60px;
+    float: right; }
+    #current #buttons #left, #current #buttons #right {
+      width: 60px;
+      height: 60px;
+      float: left;
+      display: inline-block;
+      margin: 25px -6.5px 0 -6.5px; }
+      #current #buttons #left a, #current #buttons #right a {
+        width: 50px;
+        height: 50px;
+        background: grey;
+        border-radius: 50%;
+        display: block;
+        border: 4px solid #222222;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        -webkit-box-shadow: inset 0 -4px 30px 1px rgba(12, 12, 12, 0.95), inset 0 -1px 20px 1px RGBa(30, 30, 30, 0.9);
+        box-shadow: inset 0 -4px 30px 1px rgba(12, 12, 12, 0.95), inset 0 -1px 20px 1px RGBa(30, 30, 30, 0.9); }
+        #current #buttons #left a:hover, #current #buttons #right a:hover {
+          background: #555; }
+        #current #buttons #left a img, #current #buttons #right a img {
+          width: 25px;
+          height: 25px;
+          margin-top: 14px;
+          margin-left: 12px;
+          opacity: .5; }
+    #current #buttons #center {
+      width: 110px;
+      height: 100px;
+      float: left;
+      display: inline-block; }
+      #current #buttons #center a {
+        width: 100px;
+        height: 100px;
+        display: block;
+        background: grey;
+        border-radius: 50%;
+        border: 4px solid #222222;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        -webkit-box-shadow: inset 0 -6px 55px 1px RGBa(12, 12, 12, 0.95), inset 0 -1px 20px 3px RGBa(50, 50, 50, 0.5);
+        box-shadow: inset 0 -6px 55px 1px RGBa(12, 12, 12, 0.95), inset 0 -1px 20px 3px RGBa(50, 50, 50, 0.5); }
+        #current #buttons #center a:hover {
+          background: #555; }
+        #current #buttons #center a img {
+          position: absolute;
+          width: 50px;
+          height: 50px;
+          margin-top: 28px;
+          margin-left: 32px;
+          opacity: .5; }
+          #current #buttons #center a img#pause {
+            display: none; }
+
+#playlist {
+  display: block;
+  width: 800px;
+  margin: 0 auto 0px auto;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  padding: 10px;
+  background: RGBa(30, 30, 30, 0.9);
+  list-style: none;
+  border-left: 5px solid RGBa(10, 10, 10, 0.7);
+  border-right: 5px solid RGBa(10, 10, 10, 0.7);
+  border-bottom: 5px solid RGBa(10, 10, 10, 0.7);
+  *zoom: 1; }
+  #playlist:before, #playlist:after {
+    content: " ";
+    display: table; }
+  #playlist:after {
+    clear: both; }
+  #playlist li {
+    list-style: none;
+    border-bottom: 2px solid #333333;
+    width: 100%; }
+    #playlist li.list {
+      height: 110px; }
+      #playlist li.list img {
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+        float: left;
+        margin-top: 5px;
+        margin-left: 10px; }
+      #playlist li.list .track_info {
+        width: 400px;
+        float: left;
+        margin-left: 20px;
+        color: #dddddd; }
+        #playlist li.list .track_info h3 {
+          margin: 15px 0 5px 0;
+          padding: 0;
+          font-size: 28px;
+          display: block;
+          min-width: 200px;
+          max-width: 500px; }
+        #playlist li.list .track_info h4 {
+          min-width: 200px;
+          max-width: 500px;
+          display: block;
+          margin: 5px 0;
+          padding: 0;
+          font-size: 20px; }
+        #playlist li.list .track_info h5 {
+          min-width: 200px;
+          max-width: 500px;
+          display: block;
+          margin: 10px 0;
+          padding: 0;
+          font-size: 14px; }
+      #playlist li.list .approve {
+        border-radius: 6px;
+        float: right; }
+        #playlist li.list .approve a {
+          text-decoration: none;
+          display: inline-block;
+          float: left;
+          width: 120px;
+          height: 40px;
+          line-height: 40px;
+          color: #454545;
+          background: RGB(120, 120, 120);
+          text-align: center;
+          font-weight: bold;
+          border-radius: 4px;
+          margin: 35px 2px 0 2px;
+          -webkit-transition: all 0.3s ease-in-out;
+          -moz-transition: all 0.3s ease-in-out;
+          -ms-transition: all 0.3s ease-in-out;
+          -o-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out; }
+          #playlist li.list .approve a.remove:hover {
+            background: RGBa(216, 78, 52, 0.8);
+            opacity: .8; }
+          #playlist li.list .approve a.add:hover {
+            background: RGBa(158, 202, 59, 0.9);
+            opacity: .8; }
+          #playlist li.list .approve a img {
+            width: 30px;
+            height: 30px;
+            opacity: .4;
+            display: inline-block; }

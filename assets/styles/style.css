@@ -1,0 +1,73 @@
+/* COLORS */
+/* FONTS */
+@font-face {
+  font-family: ProximaNovaLight;
+  src: url("../fonts/ProximaNova-Light.otf");
+  /* url('ProximaNova-Light.otf');  IE9 */ }
+
+body, html {
+  padding: 0;
+  margin: 0;
+  font-family: ProximaNovaLight;
+  height: 100%; }
+
+#top {
+  background-image: url("../images/rage.jpg");
+  background-image: url("../images/rage.jpg");
+  background-image: url("../images/rage.jpg");
+  background-image: url("../images/rage.jpg");
+  background-image: url("../images/rage.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%; }
+  #top #left {
+    width: 400px;
+    float: left;
+    height: 100%;
+    background: RGBa(222, 222, 222, 0.6); }
+    #top #left #logo {
+      display: block;
+      width: 100%;
+      margin: 0px auto 50px auto;
+      font-size: 90px;
+      color: white;
+      text-align: center;
+      padding-top: 50px;
+      font-weight: bold; }
+      #top #left #logo span {
+        color: RGBa(158, 202, 59, 0.9); }
+    #top #left a#create {
+      text-decoration: none;
+      display: block;
+      width: 220px;
+      height: 70px;
+      border-radius: 4px;
+      text-align: center;
+      line-height: 70px;
+      color: white;
+      margin: 0 auto;
+      background: RGBa(158, 202, 59, 0.9);
+      border: 5px solid RGBa(215, 215, 215, 0.4);
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -ms-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      font-size: 24px;
+      text-transform: uppercase; }
+      #top #left a#create:hover {
+        background: #8ab034; }
+    #top #left #number {
+      color: white;
+      width: 300px;
+      display: block;
+      padding: 10px;
+      font-size: 30px;
+      text-align: center;
+      background: RGBa(50, 50, 50, 0.8);
+      border-radius: 4px;
+      margin: 50px auto 0 auto;
+      border: 2px solid RGB(45, 45, 45, 0.9); }

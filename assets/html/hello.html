@@ -1,0 +1,63 @@
+<head>
+  <title>Rdio Playback API simple example</title>
+  <script src="jquery-1.5.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+  
+  <script src="../js/hello.js"></script>
+  <script src="../js/token.js"></script>
+  <style type="text/css">
+    #freq div {
+      height: 10px;
+      background-color: red;
+    }
+    #upsell div {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<h1>Rdio Playback API simple example</h1>
+<div id="apiswf"></div>
+<dl>
+  <dt>playState</dt>
+  <dd id="playState"></dd>
+
+  <dt>track</dt>
+  <dd id="track"></dd>
+  <dt>album</dt>
+  <dd id="album"></dd>
+  <dt>artist</dt>
+  <dd id="artist"></dd>
+  <dt>art</dt>
+  <dd><img src="" id="art"></dd>
+  <dt>position</dt>
+  <dd id="position"></dd>
+</dl>
+
+<input id="play_key" value="a997982"><button id="play">Play</button><br>
+<button id="stop">Stop</button>
+<button id="pause">Pause</button>
+<button id="previous">Previous</button>
+<button id="next">Next</button>
+
+<div id="freq">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<div id="upsell">
+  <div id="subscriber">You are an Rdio subscriber. You're awesome.</div>
+  <div id="trial">You are an Rdio trial user, Subscribe now!</div>
+  <div id="free">You are an Rdio Free user with <span id="remaining"></span>% of your quota remaining, subscribe now!</div>
+  <div id="nobody">To hear full tracks subscribe to Rdio.</div>
+</div>
+</body>
+</html>
