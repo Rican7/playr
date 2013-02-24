@@ -1,9 +1,9 @@
 $(document).ready(function() {
 	$(window).scroll(function(){
 		if ($(this).scrollTop() >= 130) {
-			$('#nav').addClass('sticky');
+			$('#hidden').fadeIn();
 		} else {
-			$('#nav').removeClass('sticky');
+			$('#hidden').fadeOut();
 		}
 	});
 });

@@ -6,6 +6,7 @@
 		%script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js")
 		%script(src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js")
 		%script(src="../js/playlist.js" type="text/javascript")
+		%script(src="../js/frontend.js" type="text/javascript")
 
 		%link(rel="stylesheet" href="../styles/playlist.css")
 
@@ -16,6 +17,24 @@
 		#nav
 			%a#logo(href="index.html")
 				play<span>r</span>
+
+		#hidden 
+			%img(src="#")
+			#current_info	
+				%h3
+					Jay-Z
+				%br
+				%h4
+					Some Song
+
+			#nav_buttons 
+				%a#nav_back(href="#")
+					%img(src="../images/back.png")
+				%a#nav_play(href="#")
+					%img(src="../images/play.png")
+				%a#nav_next(href="#")
+					%img(src="../images/next.png")
+
 
 		#current
 			%img(src="../images/kanye.jpeg")
