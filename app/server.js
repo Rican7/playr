@@ -71,6 +71,10 @@ app.get('/', function(request, response) {
 	response.render('index');
 });
 
+app.get('/play', function(request, response) {
+	response.render('playlist');
+});
+
 app.get('/playlist', function (request, response) {
   response.render('playlist.hbs', {
     tracks: playlist.getSongs()
