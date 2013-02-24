@@ -8,7 +8,7 @@
     "stache": "x",
     "socket.io": "0.9.x",
     "consolidate": "0.8.x",
-    "handlebars": "1.x.x"
+    "hbs": "2.x.x"
   },
   "engines": {
     "node": "0.8.x",
