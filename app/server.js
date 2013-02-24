@@ -1,11 +1,20 @@
 // Require our express app framework
 var express = require('express');
 
+// Models
+var Models = {
+	queue: require('./lib/models/queue.js'),
+	track: require('./lib/models/song.js')
+};
+
 // External libs
+var _ = require('underscore');
 var rdio = require('./lib/rdio/rdio.js');
 
 // Internal libs
-var music = require('./lib/music.js')(rdio);
+var music = require('./lib/music.js')(rdio, Models);
+
+
 
 // Create our app
 var app = express.createServer(express.logger());
@@ -14,8 +23,6 @@ app.use(express.bodyParser());
 var twilioClient = require('twilio')('ACceb22beac0d0c3ca5337f63739a1fbe3', 'f6a772f1a1094b582eec2a91f0454a70');
 
 app.get('/', function(request, response) {
-  // response.send('Hello World!');
-
   // Test our lib
   music.getTrack( 'fader', function( error, data ) {
 	  response.send( data );

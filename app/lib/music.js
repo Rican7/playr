@@ -2,7 +2,7 @@
  * Export our music library
  * (control what functions get exported to our app)
  */
-module.exports = function(Rdio) {
+module.exports = function(Rdio, Models) {
 	// Instanciate our music service
 	var musicService = new Rdio(['r656xv8q7h2x34mvk3aarqzv', '7kFc8Hz9aH']);
 
@@ -46,10 +46,17 @@ module.exports = function(Rdio) {
 						// Set our result data to just our results
 						data = data.result.results;
 
-						// If we only want our first result
-						// Also, do a really hilarious javascript check to see if this is an array
-						if (firstResultOnly === true && Object.prototype.toString.call( data ) === '[object Array]') {
-							data = data[0];
+						// Do a really hilarious javascript check to see if this is an array
+						if (Object.prototype.toString.call( data ) === '[object Array]') {
+							// If we only want our first result
+							if (firstResultOnly === true) {
+								data = new Models.track(data[0]);
+							}
+							else {
+								for (var result in data) {
+									data[result] = new Models.track(data[result]);
+								}
+							}
 						}
 					}
 
