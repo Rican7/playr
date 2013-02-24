@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function (json) {
 	// The sauce
 	this.key = "";
 	this.embedUrl = "";
@@ -9,19 +9,21 @@ module.exports = function () {
 	this.album = "";
 	this.icon = "";
 	this.baseIcon = "";
+	this.duration = 0;
 
 	// Misc.	
 	this.albumKey = "";
-	this.albumURL = "";
+	this.albumUrl = "";
 	this.artistKey = "";
 	this.canStream = false;
 	this.canSample = false;
 
-	return {
-		initialize: function (json) {
-			Object.map(json, function(data){
-				console.log(data);
-			})
+	// Set our properties by our passed in data
+	for (var prop in json) {
+		if (this.hasOwnProperty(prop)) {
+			this[prop] = json[prop];
 		}
-	};
+	}
+
+	return this;
 };
