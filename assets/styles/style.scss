@@ -1,0 +1,63 @@
+@import "main";
+
+#top {
+	@include background-image(url("../images/rage.jpg"));
+	@include background-size(cover);
+	height:100%;
+	
+
+	#left {
+		width:400px;
+		float:left;
+		height:100%;
+		background:RGBa(222,222,222,.6);
+		#logo {
+			display: block;
+			width:100%;
+			margin:0px auto 50px auto;
+			font-size:90px;
+			color:white;
+			text-align:center;
+			padding-top:50px;
+			font-weight:bold;
+			span {
+				color:$green;
+			}
+		}
+
+		a#create {
+			text-decoration: none;
+			display: block;
+			width:220px;
+			height:70px;
+			border-radius:4px;
+			text-align:center;
+			line-height:70px;
+			color:white;
+			margin: 0 auto;
+			background:$green;
+			border:5px solid RGBa(215,215,215,.4);
+			@include transition(all .4s ease-in-out);
+			font-size:24px;
+			text-transform: uppercase;
+		
+			&:hover {
+				background:$green_dark;
+			}
+		}
+
+		#number {
+			color:white;
+			width:300px;
+			display: block;
+			padding:10px;
+			font-size:30px;
+			text-align:center;
+			background:RGBa(50,50,50,.8);
+			border-radius:4px;
+			margin:50px auto 0 auto;
+			border:2px solid RGB(45,45,45, .9);
+
+		}
+	}
+}
