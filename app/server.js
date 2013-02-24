@@ -15,8 +15,7 @@ var twilioClient = require('twilio')('ACceb22beac0d0c3ca5337f63739a1fbe3', 'f6a7
 
 // Internal libs
 var music = require('./lib/music.js')(rdio, Models);
-
-
+var sms = require('./lib/sms.js')(twilioClient);
 
 // Create our app
 var app = express.createServer(express.logger());
@@ -26,8 +25,20 @@ app.set('view engine', 'mustache');
 app.set('view options', { layout: false });
 app.register('.mustache', stache);
 
+// Socket.io
+var io = require('socket.io').listen(app);
+
+app.get('/add-track', function (request, response) {
+  io.sockets.emit('track-create', {name: "eli"});
+  response.send(200);
+});
+
 app.get('/', function(request, response) {
 	response.render('index');
+});
+
+app.get('/playlist', function (request, response) {
+  response.render('playlist');
 });
 
 app.get('/token', function(request, response) {
@@ -75,6 +86,7 @@ app.post('/sms/reply/', function(request, response) {
 
 		// Did we get a response?
 		if ( data !== null ) {
+      io.sockets.emit('track-create', data);
 			// Set our success message
 			var responseMessage = "Thanks for searching for " + searchParam + "! You just might hear your song soon. ;)";
 		}
@@ -83,27 +95,10 @@ app.post('/sms/reply/', function(request, response) {
 			var responseMessage = "Sorry, we couldn't find a track matching your search: " + searchParam;
 		}
 
-		// Send a response
-		twilioClient.sms.messages.post(
-			{
-				to: sender,
-				from: "+16032623095",
-				body: responseMessage
-			},
-			// Twilio response callback
-			function(err, responseData) {
-				// "err" is an error received during the request, if any
-				if (!err) {
-					// "responseData" is a JavaScript object containing data received from Twilio.
-					// A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
-					// http://www.twilio.com/docs/api/rest/sending-sms#example-1
+    // Send a response
+    sms.incomingSms(sender, responseMessage, function (error, data) {
 
-					console.log(responseData.from); // outputs "+14506667788"
-					console.log(responseData.body); // outputs "word to your mother."
-
-				}
-			}
-		);
+    });
 	});
 });
 
