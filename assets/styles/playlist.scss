@@ -1,0 +1,268 @@
+@import "main";
+
+body {
+	@include background-image(url("../images/grey.png"));
+	background-repeat:repeat-all;
+	
+}
+
+#nav {
+	width: 100%;
+	top: 0;
+	position:fixed;
+	height:80px;
+	padding:5px;
+	display:block;
+	z-index:1;
+	@include transition(all .3s ease-in-out);
+
+	&.sticky {
+		position:fixed;
+		background:RGBa(60,60,60,.95);
+	}
+
+	#logo {
+		text-decoration: none;
+		color:#DDD;
+		font-size:65px;
+		line-height:75px;
+		float:left;
+		margin-left:50px;
+		font-weight:400;
+		span {
+			color:$green;
+		}
+	}
+}
+
+#current {
+	height:200px;
+	width:800px;
+	margin:30px auto 0px auto;
+	padding:10px;
+	border-left:5px solid RGBa(10,10,10,.7);
+	border-right:5px solid RGBa(10,10,10,.7);
+	border-top:5px solid RGBa(10,10,10,.7);
+	display:block;
+	
+	background:RGBa(60,60,60,.95);
+
+	img {
+		width:190px;
+		height:190px;
+		float:left;
+	}
+
+	#info {
+		color:$grey;
+		display: block;
+		margin-left:30px;
+		float:left;
+		h2 {
+			font-size:30px;
+			display: block;
+			width:100%;
+			padding:10px 0 0 0;
+			margin: 0 0 10px 0;
+		}
+
+		h3 {
+			font-size:24px;
+			display: block;
+			width:100%;
+			padding:0;
+			margin:0;
+		}
+	}
+
+	#buttons {
+		width:210px;
+		height:60px;
+		float:right;
+
+
+		#left, #right {
+			width:60px;
+			height:60px;
+			float:left;
+			display: inline-block;
+			margin:25px -6.5px 0 -6.5px;
+
+			a {
+				width:50px;
+				height:50px;
+				background:grey;
+				border-radius:50%;
+				display: block;
+				border:4px solid #222;
+				@include transition(all .3s ease-in-out);
+				@include box-shadow(
+					inset 0 -4px 30px 1px rgba(12,12,12,0.95),
+				     inset 0 -1px 20px 1px RGBa(30,30,30,0.9)
+				);
+				&:hover {
+					background:#555;
+				}
+				img {
+					width:25px;
+					height:25px;
+					margin-top:14px;
+					margin-left:12px;
+					opacity:.5;
+				}
+			}
+		}
+
+		#center {
+			width:110px;
+			height:100px;
+			float:left;
+			display: inline-block;
+			a {
+				width:100px;
+				height:100px;
+				display: block;
+				background:grey;
+				border-radius:50%;
+				border:4px solid #222;
+				@include transition(all .3s ease-in-out);
+				@include box-shadow(
+					inset 0 -6px 55px 1px RGBa(12,12,12,0.95),
+				     inset 0 -1px 20px 3px RGBa(50,50,50,0.5)
+				);
+				&:hover {
+					background:#555;
+				}
+				img {
+					position:absolute;
+					width:50px;
+					height:50px;
+					margin-top:28px;
+					margin-left:32px;
+					opacity:.5;
+					&#pause {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+#playlist {
+	display:block;
+	width:800px;
+	margin:0 auto 0px auto;
+	border-bottom-left-radius:6px;
+	border-bottom-right-radius:6px;
+	padding:10px;
+	background:$grey_o;
+	
+	
+	list-style:none;
+	border-left:5px solid RGBa(10,10,10,.7);
+	border-right:5px solid RGBa(10,10,10,.7);
+	border-bottom:5px solid RGBa(10,10,10,.7);
+	@include clearfix;
+	
+
+	li {
+		list-style:none;
+		border-bottom:2px solid #333333;
+		width:100%;
+
+		&.list {
+			height:110px;
+
+			img {
+				width:100px;
+				height:100px;
+				display: inline-block;
+				float: left;
+				margin-top:5px;
+				margin-left:10px;
+			}
+
+			.track_info {
+				width:400px;
+				float:left;
+				margin-left:20px;
+				color:$grey;
+				h3 {
+					margin:15px 0 5px 0;
+					padding:0;
+					font-size:28px;
+					display: block;
+					min-width:200px;
+					max-width:500px;
+				}
+
+				h4 {
+					min-width:200px;
+					max-width:500px;
+					display: block;
+					margin:5px 0;
+					padding:0;
+					font-size:20px;
+				}
+
+				h5 {
+					min-width:200px;
+					max-width:500px;
+					display: block;
+					margin:10px 0;
+					padding:0;
+					font-size:14px;
+				}
+
+
+			}
+
+			.approve {
+					border-radius:6px;
+					float:right;
+				a {
+					text-decoration: none;
+					display: inline-block;
+					float:left;
+					width:120px;
+					height:40px;
+					line-height:40px;
+					color:$black;
+					background:RGB(120,120,120);
+					text-align:center;
+					font-weight:bold;
+					border-radius:4px;
+					margin:35px 2px 0 2px;
+					@include transition(all .3s ease-in-out);
+					&.remove {
+						&:hover {
+							
+							background:$orange;
+							opacity:.8;
+						}
+					}
+
+					&.add {
+						&:hover {
+							background:$green;
+							opacity:.8;
+						}
+					}
+
+					img {
+						width:30px;
+						height:30px;
+						opacity:.4;
+						display: inline-block;
+					}
+				}
+				
+			}
+		}
+	}
+}
+
+

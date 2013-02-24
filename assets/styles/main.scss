@@ -1,0 +1,27 @@
+@import "bourbon";
+
+/* COLORS */
+$grey_o: RGBa(30,30,30,.9);
+$grey: #DDD;
+$red: RGBa(144,47,72, .8);
+$orange: RGBa(216, 78, 52, .8);
+$black:#454545;
+$green: RGBa(158,202,59,.9);
+$green_dark:#8AB034;
+
+
+/* FONTS */
+
+@font-face {
+font-family: ProximaNovaLight;
+		src: url('../fonts/ProximaNova-Light.otf');
+     	/* url('ProximaNova-Light.otf');  IE9 */
+}
+
+
+body, html {
+	padding:0;
+	margin:0;
+	font-family:ProximaNovaLight;
+	height:100%;
+}

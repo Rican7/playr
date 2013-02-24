@@ -1,0 +1,74 @@
+!!!
+
+%html
+
+	%head
+		%link(href="../styles/test.css" rel="stylesheet")
+
+		%script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js")
+		%script(src="../js/jquery.rdio.min.js" type="text/javascript")
+		%script(src="../js/main.js" type="text/javascript")
+		%script(src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js")
+
+		
+	%body
+		%h1 
+			test
+
+		#api
+
+		#box
+			%h3
+				playState
+			#playState
+
+			%h3
+				track
+			#track
+
+			%h3
+				album
+			#album
+
+			%h3
+				artist
+			#artist
+
+			%h3
+				art
+			%div
+				%img#art(src="#")
+
+		#buttons
+			%input#play_key
+				%button#play
+					Play
+				%button#stop
+					Stop
+				%button#pause
+					Pause
+				%button#previous
+					Previous
+				%button#next
+					Next
+
+		#freq	
+			%div
+			%div
+			%div
+			%div
+			%div
+			%div
+			%div
+			%div
+
+
+
+
+
+
+
+
+
+
+
