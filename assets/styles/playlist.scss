@@ -16,11 +16,6 @@ body {
 	z-index:1;
 	@include transition(all .3s ease-in-out);
 
-	&.sticky {
-		position:fixed;
-		background:RGBa(60,60,60,.95);
-	}
-
 	#logo {
 		text-decoration: none;
 		color:#DDD;
@@ -34,6 +29,102 @@ body {
 		}
 	}
 }
+
+#hidden {
+	width:260px;
+	position:fixed;
+	height:160px;
+	left:10px;
+	top:90px;
+	background:RGBa(60, 60, 60, 0.95);
+	padding:10px;
+	display:none;
+	color:#EEE;
+	border-radius:4px;
+	border:3px solid #222;
+
+	img {
+			width:70px;
+			height:70px;
+			float:left;
+		}
+	#current_info {
+		padding:10px;
+		float:left;
+		h3 {
+			display: block;
+			padding:0;
+			margin: 0 0 10px 0;
+			font-size:22px;
+			float:left;
+			max-width:200px;
+		}
+
+		h4 {
+			padding:0; 
+			margin:0;
+			font-size:18px;
+			float:left;
+			max-width:200px;
+		}
+	}
+
+	#nav_buttons {
+		float:left;
+		margin-top:10px;
+		margin-left:40px;
+		display: block;
+		position:relative;
+
+		#nav_back, #nav_next {
+			width:50px;
+			height:50px;
+			background:grey;
+			border-radius:50%;
+			display: inline-block;
+			margin:0 -6px;
+			border:2px solid #222;
+			@include transition(all .3s ease-in-out);
+			@include box-shadow(
+				inset 0 -4px 30px 1px rgba(12,12,12,0.95),
+				inset 0 -1px 20px 1px RGBa(30,30,30,0.9)
+				);
+			&:hover {
+					background:#555;
+				}
+			img {
+				width:20px;
+				height:20px;
+				margin: 15px 5px 15px 15px;
+				opacity:.5;
+			}
+		}
+
+		#nav_play {
+			display: inline-block;
+			background:grey;
+			border-radius:50%;
+			width:70px;
+			height:70px;
+			border:3px solid #222;
+			@include transition(all .3s ease-in-out);
+			@include box-shadow(
+				inset 0 -4px 30px 1px rgba(12,12,12,0.95),
+				inset 0 -1px 20px 1px RGBa(30,30,30,0.9)
+				);
+			&:hover {
+					background:#555;
+				}
+			img {
+				width:40px;
+				height:40px;
+				margin: 15px 5px 0 20px;
+				opacity:.5;
+			}
+		}
+	}
+}
+
 
 #current {
 	height:200px;
