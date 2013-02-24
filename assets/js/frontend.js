@@ -49,6 +49,7 @@
 					$('#currentArt').attr('src', playingTrack.icon);
 					$('#currentTrack').text(playingTrack.name);
 					$('#currentArtist').text(playingTrack.artist);
+					rdioControl.play();
 				}
 			});
 

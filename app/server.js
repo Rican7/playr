@@ -66,6 +66,12 @@ io.sockets.on('connection', function (socket) {
   });
 });
 
+// assuming io is the Socket.IO server object
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
+});
+
 app.get('/', function(request, response) {
 	response.render('index');
 });
