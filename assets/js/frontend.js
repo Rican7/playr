@@ -34,7 +34,7 @@
 		);
 
 		// Connect to our socket.io connection
-		socket = io.connect(document.location.origin + ':5000'); // Connect to our own server
+		socket = io.connect(document.location.origin); // Connect to our own server
 
 		// When our Rdio client is ready...
 		$rdioEl.bind('ready.rdio', function(ev, userInfo) {
