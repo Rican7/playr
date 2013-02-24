@@ -1,26 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js'></script>
-    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
-    <script src='../js/playlist.js' type='text/javascript'></script>
-    <link href='../styles/playlist.css' rel='stylesheet'>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io.connect('http://playr.dev:5000');
-      socket.on('track-create', function (data) {
-        console.log(data);
-      });
-
-      $(document).ready(function(){
-            // on click of the button (jquery thing)
-            // the things inside this clause happen only when 
-            // the button is clicked.
-            $("#play_pause").click(function(){
-            	socket.emit("track-finish");
-            });
-      	});
-    </script>
+    <link href='/styles/playlist.css' rel='stylesheet'>
   </head>
   <body>
     <div id='nav_hidden'></div>
@@ -60,30 +41,38 @@
     </div>
     <ul id='playlist'>
     	{{#tracks}}
-<li class='list'>
-<img src="{{ icon }}">
-<div class='track_info'>
-  <h3>
-    {{ name }}
-  </h3>
-  <h4>
-    {{ artist }}
-  </h4>
-  <h5>
-    Sent by (999) 999-9999
-  </h5>
-</div>
-<div class='approve'>
-  <a class='remove active' href='#'>
-    <img src='../images/remove.png'>
-    Remove
-  </a>
-  <a class='add active' href='#'>
-    <img src='../images/check.png'>
-    Add
-  </a>
-</div>
-</li>    	{{/tracks}}
+      <li class='list'>
+      <img src="{{ icon }}">
+      <div class='track_info'>
+        <h3>
+          {{ name }}
+        </h3>
+        <h4>
+          {{ artist }}
+        </h4>
+        <h5>
+          Sent by (999) 999-9999
+        </h5>
+      </div>
+      <div class='approve'>
+        <a class='remove active' href='#'>
+          <img src='../images/remove.png'>
+          Remove
+        </a>
+        <a class='add active' href='#'>
+          <img src='../images/check.png'>
+          Add
+        </a>
+      </div>
+      </li>    	
+      {{/tracks}}
     </ul>
+    <div id='rdio-wrapper'></div>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js'></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
+    <script src='/js/jquery.rdio.min.js' type='text/javascript'></script>
+    <script src='/socket.io/socket.io.js' type='text/javascript'></script>
+    <script src='/js/playlist.js' type='text/javascript'></script>
+    <script src='/js/frontend.js' type='text/javascript'></script>
   </body>
 </html>
