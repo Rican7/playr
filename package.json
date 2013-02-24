@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "2.5.x",
-    "twilio": "0.8.1"
+    "twilio": "0.8.1",
+    "underscore": "1.4.x",
+    "spotify": "0.x.x"
   },
   "engines": {
     "node": "0.8.x",
