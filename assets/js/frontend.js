@@ -82,7 +82,9 @@
 					}
 
 					// Play our first song
-					rdioControl.playQueuedTrack(0);
+					// rdioControl.playQueuedTrack(0);
+					rdioControl.play();
+
 				}
 			});
 
