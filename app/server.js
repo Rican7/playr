@@ -70,7 +70,9 @@ app.post('/sms/reply/', function(request, response) {
 	console.log(request.body);
 
 	// Find our track. Grab the first one.
-	music.searchTrack( searchParam, function( error, data ) {
+	music.getTrackByQuery( searchParam, function( error, data ) {
+		console.log( data );
+
 		// Did we get a response?
 		if ( data !== null ) {
 			// Set our success message
@@ -102,7 +104,7 @@ app.post('/sms/reply/', function(request, response) {
 				}
 			}
 		);
-	}, topOnly);
+	});
 });
 
 var port = process.env.PORT || 5000;
