@@ -3,12 +3,8 @@
 %html
 
 	%head
-		%script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js")
-		%script(src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js")
-		%script(src="../js/playlist.js" type="text/javascript")
-		%script(src="../js/frontend.js" type="text/javascript")
 
-		%link(rel="stylesheet" href="../styles/playlist.css")
+		%link(rel="stylesheet" href="/styles/playlist.css")
 
 	%body
 
@@ -29,15 +25,15 @@
 
 			#nav_buttons 
 				%a#nav_back(href="#")
-					%img(src="../images/back.png")
+					%img(src="/images/back.png")
 				%a#nav_play(href="#")
-					%img(src="../images/play.png")
+					%img(src="/images/play.png")
 				%a#nav_next(href="#")
-					%img(src="../images/next.png")
+					%img(src="/images/next.png")
 
 
 		#current
-			%img(src="../images/kanye.jpeg")
+			%img(src="/images/kanye.jpeg")
 
 			#info
 				%h2#title
@@ -49,21 +45,21 @@
 			#buttons
 				#left
 					%a#back(href="#")
-						%img(src="../images/back.png")
+						%img(src="/images/back.png")
 
 				#center	
 					%a#play_pause(href="#")
 
-						%img#play(src="../images/play.png")			
-						%img#pause(src="../images/pause.png")			
+						%img#play(src="/images/play.png")			
+						%img#pause(src="/images/pause.png")			
 						
 				#right
 					%a#next(href="#")
-						%img(src="../images/next.png")
+						%img(src="/images/next.png")
 
 		%ul#playlist
 			%li.list
-				%img(src="../images/miguel.jpeg")
+				%img(src="/images/miguel.jpeg")
 				.track_info
 					%h3
 						Adorn
@@ -73,14 +69,14 @@
 						Sent by (999) 999-9999
 				.approve
 					%a.remove.active(href="#")
-						%img(src="../images/remove.png")
+						%img(src="/images/remove.png")
 						Remove
 					%a.add.active(href="#")
-						%img(src="../images/check.png")
+						%img(src="/images/check.png")
 						Add
 
 			%li.list
-				%img(src="../images/miguel.jpeg")
+				%img(src="/images/miguel.jpeg")
 				.track_info
 					%h3
 						Adorn
@@ -90,13 +86,13 @@
 						Sent by (999) 999-9999
 				.approve
 					%a.remove.active(href="#")
-						%img(src="../images/remove.png")
+						%img(src="/images/remove.png")
 						Remove
 					%a.add.active(href="#")
-						%img(src="../images/check.png")
+						%img(src="/images/check.png")
 						Add
 			%li.list
-				%img(src="../images/miguel.jpeg")
+				%img(src="/images/miguel.jpeg")
 				.track_info
 					%h3
 						Adorn
@@ -106,31 +102,14 @@
 						Sent by (999) 999-9999
 				.approve
 					%a.remove.active(href="#")
-						%img(src="../images/remove.png")
+						%img(src="/images/remove.png")
 						Remove
 					%a.add.active(href="#")
-						%img(src="../images/check.png")
-						Add
-
-			%li.list
-				%img(src="../images/miguel.jpeg")
-				.track_info
-					%h3
-						Adorn
-					%h4
-						Miguel
-					%h5
-						Sent by (999) 999-9999
-				.approve
-					%a.remove.active(href="#")
-						%img(src="../images/remove.png")
-						Remove
-					%a.add.active(href="#")
-						%img(src="../images/check.png")
+						%img(src="/images/check.png")
 						Add
 
 			%li.list
-				%img(src="../images/miguel.jpeg")
+				%img(src="/images/miguel.jpeg")
 				.track_info
 					%h3
 						Adorn
@@ -140,14 +119,14 @@
 						Sent by (999) 999-9999
 				.approve
 					%a.remove.active(href="#")
-						%img(src="../images/remove.png")
+						%img(src="/images/remove.png")
 						Remove
 					%a.add.active(href="#")
-						%img(src="../images/check.png")
+						%img(src="/images/check.png")
 						Add
 
 			%li.list
-				%img(src="../images/miguel.jpeg")
+				%img(src="/images/miguel.jpeg")
 				.track_info
 					%h3
 						Adorn
@@ -157,14 +136,14 @@
 						Sent by (999) 999-9999
 				.approve
 					%a.remove.active(href="#")
-						%img(src="../images/remove.png")
+						%img(src="/images/remove.png")
 						Remove
 					%a.add.active(href="#")
-						%img(src="../images/check.png")
+						%img(src="/images/check.png")
 						Add
 
 			%li.list
-				%img(src="../images/miguel.jpeg")
+				%img(src="/images/miguel.jpeg")
 				.track_info
 					%h3
 						Adorn
@@ -174,14 +153,14 @@
 						Sent by (999) 999-9999
 				.approve
 					%a.remove.active(href="#")
-						%img(src="../images/remove.png")
+						%img(src="/images/remove.png")
 						Remove
 					%a.add.active(href="#")
-						%img(src="../images/check.png")
+						%img(src="/images/check.png")
 						Add
 
 			%li.list
-				%img(src="../images/miguel.jpeg")
+				%img(src="/images/miguel.jpeg")
 				.track_info
 					%h3
 						Adorn
@@ -191,13 +170,37 @@
 						Sent by (999) 999-9999
 				.approve
 					%a.remove.active(href="#")
-						%img(src="../images/remove.png")
+						%img(src="/images/remove.png")
 						Remove
 					%a.add.active(href="#")
-						%img(src="../images/check.png")
+						%img(src="/images/check.png")
+						Add
+
+			%li.list
+				%img(src="/images/miguel.jpeg")
+				.track_info
+					%h3
+						Adorn
+					%h4
+						Miguel
+					%h5
+						Sent by (999) 999-9999
+				.approve
+					%a.remove.active(href="#")
+						%img(src="/images/remove.png")
+						Remove
+					%a.add.active(href="#")
+						%img(src="/images/check.png")
 						Add
 					
+		#rdio-wrapper
 
+		%script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js")
+		%script(src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js")
+		%script(src="/js/jquery.rdio.min.js" type="text/javascript")
+		%script(src="/socket.io/socket.io.js" type="text/javascript")
+		%script(src="/js/playlist.js" type="text/javascript")
+		%script(src="/js/frontend.js" type="text/javascript")
 
 			
 
