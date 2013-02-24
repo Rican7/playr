@@ -9,7 +9,7 @@ var Models = {
 
 // External libs
 var _ = require('underscore');
-var stache = require('stache');
+// var stache = require('stache');
 var rdio = require('./lib/rdio/rdio.js');
 var twilioClient = require('twilio')('ACceb22beac0d0c3ca5337f63739a1fbe3', 'f6a772f1a1094b582eec2a91f0454a70');
 
@@ -19,22 +19,30 @@ var sms = require('./lib/sms.js')(twilioClient);
 var playlist = new Models.queue();
 
 // Create our app
-var app = express.createServer(express.logger());
+var app = express();
+var cons = require('consolidate');
 app.use(express.bodyParser());
 app.use(express.static('assets'));
-app.set('view engine', 'mustache');
+
+// assign the swig engine to .html files
+app.engine('handlebars', cons.handlebars);
+app.set('view engine', 'handlebars');
 app.set('view options', { layout: false });
-app.register('.mustache', stache);
+app.set('views', __dirname + '/views');
+
+console.log(__dirname + '/views');
+// app.register('.mustache', stache);
+
 
 // Socket.io
-var io = require('socket.io').listen(app);
+var http = require('http')
+  , server = http.createServer(app);
+var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function (socket) {
   socket.on('track-finish', function (data) {
     playlist.songFinished(0);
-    playlist.getSongs( function (playlist) {
-      console.log(playlist);
-    });
+    console.log(playlist.getSongs());
   });
 
   socket.on('track-deny', function (songKey) {
@@ -50,9 +58,7 @@ app.get('/add-track', function (request, response) {
     if ( data !== null ) {
       io.sockets.emit('track-create', data);
       playlist.addSong(data, function (vears) {
-        playlist.getSongs( function (playlist) {
-          console.log(playlist);
-        });
+        console.log(playlist.getSongs());
       });
       response.send(data);
     } else {
@@ -66,7 +72,9 @@ app.get('/', function(request, response) {
 });
 
 app.get('/playlist', function (request, response) {
-  response.render('playlist');
+  response.render('playlist.hbs', {
+    tracks: playlist.getSongs()
+  });
 });
 
 app.get('/token', function(request, response) {
@@ -131,6 +139,7 @@ app.post('/sms/reply/', function(request, response) {
 });
 
 var port = process.env.PORT || 5000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
+server.listen(port);
+// app.listen(port, function() {
+//   console.log("Listening on " + port);
+// });
