@@ -4,14 +4,13 @@ module.exports = function () {
  	var playedSongs = [];
 
 	return {
-		addSong: function (song, callback) {
-			upcomingSongs.push(song);
-			callback(this);
+		addSong: function (song) {
+			return upcomingSongs.push(song);
 		},
 
-		songFinished: function (index) {
+		songFinished: function () {
 			playedSongs.push(upcomingSongs[0]);
-			removeSongAtIndex(0);
+			this.removeSongAtIndex(0);
 		},
 
 		removeSongAtIndex: function(index) {
@@ -20,6 +19,10 @@ module.exports = function () {
 
 		getSongs: function () {
 			return upcomingSongs;
+		},
+
+		getPlayedSongs: function () {
+			return playedSongs;
 		}
 	};
 };
