@@ -144,7 +144,7 @@ app.get('/track/add', function (request, response) {
 
 app.get('/track/remove/:id', function(request, response) {
 	// Grab our params
-	var trackId = request.param.id;
+	var trackId = parseInt((request.param('id') || 0), 10);
 
 	// Remove our track from our playlist
 	playlist.removeSongAtIndex(trackId);
