@@ -18,8 +18,8 @@ module.exports = function () {
 			upcomingSongs.splice(index, 1);
 		},
 
-		getSongs: function (callback) {
-			callback(upcomingSongs);
+		getSongs: function () {
+			return upcomingSongs;
 		}
 	};
 };
