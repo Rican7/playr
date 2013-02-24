@@ -22,6 +22,15 @@ app.use(express.bodyParser());
 
 var twilioClient = require('twilio')('ACceb22beac0d0c3ca5337f63739a1fbe3', 'f6a772f1a1094b582eec2a91f0454a70');
 
+app.get('/?', function(request, response) {
+	// Create our domain option
+	var domain = 'playr.metroserve.me';
+
+	music.getPlaybackToken(domain, function( error, data ) {
+		response.send( data );
+	});
+});
+
 app.get('/track/search', function(request, response) {
 	// Grab our params
 	var searchQuery = request.query.q || '';

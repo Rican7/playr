@@ -32,6 +32,18 @@ module.exports = function(Rdio, Models) {
 				callback(error, data);
 			});
 		},
+		getPlaybackToken: function(domain, callback) {
+			// Get our playback token from our service
+			this.serviceCall( 'getPlaybackToken', 
+				// Pass our params
+				{
+					domain: domain
+				},
+				function(error, data) {
+					callback(error, data);
+				}
+			);
+		},
 		searchTrack: function(query, callback, firstResultOnly) {
 			// Search with our music service
 			this.serviceCall( 'search',
