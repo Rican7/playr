@@ -34,7 +34,6 @@ app.get('/add-track', function (request, response) {
 });
 
 app.get('/', function(request, response) {
-	// response.send( 'hi!' );
 	response.render('index');
 });
 
@@ -75,26 +74,47 @@ app.post('/voice/', function(request, response) {
 });
 
 app.post('/sms/reply/', function(request, response) {
-	console.log(request.body);
+	// Grab our params
 	var sender = request.body.From;
 	var searchParam = request.body.Body;
 
-	twilioClient.sms.messages.post({
-		to: sender,
-		from: "+16032623095",
-		body: "Thanks for searching for " + searchParam + "!"
-	}, function(err, responseData) { //this function is executed when a response is received from Twilio
+	console.log(request.body);
 
-    	if (!err) { // "err" is an error received during the request, if any
+	// Find our track. Grab the first one.
+	music.getTrackByQuery( searchParam, function( error, data ) {
+		console.log( data );
 
-        // "responseData" is a JavaScript object containing data received from Twilio.
-        // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
-        // http://www.twilio.com/docs/api/rest/sending-sms#example-1
+		// Did we get a response?
+		if ( data !== null ) {
+			// Set our success message
+			var responseMessage = "Thanks for searching for " + searchParam + "! You just might hear your song soon. ;)";
+		}
+		else {
+			// Set our fail message. :/
+			var responseMessage = "Sorry, we couldn't find a track matching your search: " + searchParam;
+		}
 
-        	console.log(responseData.from); // outputs "+14506667788"
-        	console.log(responseData.body); // outputs "word to your mother."
+		// Send a response
+		twilioClient.sms.messages.post(
+			{
+				to: sender,
+				from: "+16032623095",
+				body: responseMessage
+			},
+			// Twilio response callback
+			function(err, responseData) {
+				// "err" is an error received during the request, if any
+				if (!err) {
+					// "responseData" is a JavaScript object containing data received from Twilio.
+					// A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
+					// http://www.twilio.com/docs/api/rest/sending-sms#example-1
 
-   		}
+					console.log(responseData.from); // outputs "+14506667788"
+					console.log(responseData.body); // outputs "word to your mother."
+
+				}
+			}
+		);
 	});
 });
 
