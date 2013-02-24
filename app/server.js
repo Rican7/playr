@@ -12,11 +12,16 @@ var _ = require('underscore');
 // var stache = require('stache');
 var rdio = require('./lib/rdio/rdio.js');
 var twilioClient = require('twilio')('ACceb22beac0d0c3ca5337f63739a1fbe3', 'f6a772f1a1094b582eec2a91f0454a70');
+// var twilioClient = require('twilio')('AC2857c4888d5cd547ff15d79c304dd5cd', '1cc7cda79d7db7a9642f1b6c7cf11dae');
 
 // Internal libs
+var inputSanitizer = require('./lib/input-sanitizer.js')();
 var music = require('./lib/music.js')(rdio, Models);
 var sms = require('./lib/sms.js')(twilioClient);
 var playlist = new Models.queue();
+
+// Add some prototype functions
+String.prototype.clean = inputSanitizer.protoCleanQuery;
 
 // Create our app
 var app = express();
@@ -92,7 +97,7 @@ app.get('/token', function(request, response) {
 
 app.get('/track/search', function(request, response) {
 	// Grab our params
-	var searchQuery = request.query.q || '';
+	var searchQuery = (request.query.q || '').clean();
 	var topOnly = typeof request.query.first !== 'undefined' ? true : false; // Make sure its boolean
 
 	music.searchTrack( searchQuery, function( error, data ) {
@@ -102,7 +107,7 @@ app.get('/track/search', function(request, response) {
 
 app.get('/track/:key', function(request, response) {
 	// Grab our params
-	var trackKey = request.param('key') || '';
+	var trackKey = (request.param('key') || '').clean();
 
 	music.getTrackById( trackKey, function( error, data ) {
 		response.send( data );
@@ -115,8 +120,8 @@ app.post('/voice/', function(request, response) {
 
 app.post('/sms/reply/', function(request, response) {
 	// Grab our params
-	var sender = request.body.From;
-	var searchParam = request.body.Body;
+	var sender = (request.body.From).clean();
+	var searchParam = (request.body.Body).clean();
 
 	console.log(request.body);
 
@@ -126,7 +131,9 @@ app.post('/sms/reply/', function(request, response) {
 
 		// Did we get a response?
 		if ( data !== null ) {
-      io.sockets.emit('track-create', data);
+			// Pass our track to our event subscribers
+			io.sockets.emit('track-create', data);
+
 			// Set our success message
 			var responseMessage = "Thanks for searching for " + searchParam + "! You just might hear your song soon. ;)";
 		}
@@ -135,10 +142,12 @@ app.post('/sms/reply/', function(request, response) {
 			var responseMessage = "Sorry, we couldn't find a track matching your search: " + searchParam;
 		}
 
-    // Send a response
-    sms.incomingSms(sender, responseMessage, function (error, data) {
-
-    });
+		// Send a response
+		sms.incomingSms(sender, responseMessage, function (error, data) {
+			if (error !== null) {
+				console.log(error);
+			}
+		});
 	});
 });
 
