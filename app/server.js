@@ -83,7 +83,7 @@ app.get('/playlist', function (request, response) {
 
 app.get('/token', function(request, response) {
 	// Create our domain option
-	var domain = 'playr.metroserve.me';
+	var domain = request.query.host || 'playr.metroserve.me';
 
 	music.getPlaybackToken(domain, function( error, data ) {
 		response.send( data );
