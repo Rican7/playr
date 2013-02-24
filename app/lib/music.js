@@ -59,7 +59,7 @@ module.exports = function(Rdio, Models) {
 						data = data.result.results;
 
 						// Do a really hilarious javascript check to see if this is an array
-						if (Object.prototype.toString.call( data ) === '[object Array]') {
+						if (Object.prototype.toString.call( data ) === '[object Array]' && data.length > 0) {
 							// If we only want our first result
 							if (firstResultOnly === true) {
 								data = new Models.track(data[0]);
@@ -70,6 +70,9 @@ module.exports = function(Rdio, Models) {
 								}
 							}
 						}
+                  else {
+                     data = null;
+                  }
 					}
 
 					// Call our callback
@@ -94,7 +97,7 @@ module.exports = function(Rdio, Models) {
 						data = data.result;
 
 						// Do a really hilarious javascript check to see if this is an array
-						if (Object.prototype.toString.call( data ) === '[object Object]') {
+						if (Object.prototype.toString.call( data ) === '[object Object]' && Object.keys(data).length > 0) {
 							// Get the first object
 							for (var keyName in data) {
 								data = data[keyName];
@@ -103,6 +106,9 @@ module.exports = function(Rdio, Models) {
 
 							data = new Models.track(data);
 						}
+                  else {
+                     data = null;
+                  }
 					}
 
 					// Call our callback
