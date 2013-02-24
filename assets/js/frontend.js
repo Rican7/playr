@@ -34,7 +34,7 @@
 		);
 
 		// Connect to our socket.io connection
-		socket = io.connect('http://playr.metroserve.me:5000'); // Connect to our own server
+		socket = io.connect('http://playr.dev:5000'); // Connect to our own server
 
 		// When our Rdio client is ready...
 		$rdioEl.bind('ready.rdio', function(ev, userInfo) {
@@ -50,7 +50,7 @@
 			// Track create
 			socket.on('track-create', function(data) {
 				console.log(data);
-				rdioControl.play(data.key);
+				rdioControl.queue(data.key);
 
 				// Render our template with our data
 				var rendered = template( data );
@@ -59,14 +59,35 @@
 				$playlistEl.append( rendered );
 			});
 
+			socket.on('track-finish', function(data) {
+
+			});
+
 			// Track remove
 			socket.on('track-remove', function(data) {
 				console.log(data);
 				rdioControl.play(data.key);
 			});
 
+		$rdioEl.bind('playingTrackChanged.rdio', function(e, playingTrack, sourcePosition) {
+	        if (playingTrack) {
+	          $('#currentArt').attr('src', playingTrack.icon);
+	          $('#currentTrack').text(playingTrack.name);
+	          $('#currentArtist').text(playingTrack.artist);
+	        }
+        });
+
+        $('#next').click(function() {
+        	rdioControl.next();
+        });
+
+        $('#play_pause').click(function() {
+        	console.log(rdioControl);
+        	rdioControl.play();
+        });
 			// Test
 			// rdioControl.play('t2927188');
+
 		});
 	});
 })( window.playrApp = {}, jQuery);
