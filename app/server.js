@@ -78,7 +78,7 @@ app.get('/play', function (request, response) {
 
 app.get('/token', function(request, response) {
 	// Create our domain option
-	var domain = request.query.host || 'playr.dev:5000';
+	var domain = request.query.host || 'tufts-playr.herokuapp.com';
 
 	music.getPlaybackToken(domain, function( error, data ) {
 		response.send( data );
