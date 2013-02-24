@@ -66,28 +66,11 @@ io.sockets.on('connection', function (socket) {
   });
 });
 
-app.get('/add-track', function (request, response) {
-  music.getTrackByQuery( "darwin deez", function( error, data ) {
-    console.log( data );
-
-    // Did we get a response?
-    if ( data !== null ) {
-      io.sockets.emit('track-create', data);
-      playlist.addSong(data, function (vears) {
-        console.log(playlist.getSongs());
-      });
-      response.send(data);
-    } else {
-      response.send(404);
-    }
-  });
-});
-
 app.get('/', function(request, response) {
 	response.render('index');
 });
 
-app.get('/playlist', function (request, response) {
+app.get('/play', function (request, response) {
 	response.render('playlist.hbs', {
 		tracks: playlist.getSongs()
 	});
@@ -102,6 +85,18 @@ app.get('/token', function(request, response) {
 	});
 });
 
+app.get('/playlist', function (request, response) {
+	console.log(playlist.getSongs());
+
+	response.send(playlist.getSongs());
+});
+
+app.get('/playlist/past', function (request, response) {
+	console.log(playlist.getPlayedSongs());
+
+	response.send(playlist.getPlayedSongs());
+});
+
 app.get('/track/search', function(request, response) {
 	// Grab our params
 	var searchQuery = (request.query.q || '').clean();
@@ -112,13 +107,66 @@ app.get('/track/search', function(request, response) {
 	}, topOnly);
 });
 
-app.get('/track/:key', function(request, response) {
-	// Grab our params
-	var trackKey = (request.param('key') || '').clean();
+// app.get('/track/:key', function(request, response) {
+// 	// Grab our params
+// 	var trackKey = (request.param('key') || '').clean();
+// 
+// 	music.getTrackById( trackKey, function( error, data ) {
+// 		response.send( data );
+// 	});
+// });
 
-	music.getTrackById( trackKey, function( error, data ) {
-		response.send( data );
+app.get('/track/add', function (request, response) {
+	// Grab our params
+	var searchQuery = (request.query.q || 'darwin deez').clean();
+	console.log( searchQuery );
+	
+	// Find our track. Grab the first one.
+	music.getTrackByQuery( searchQuery, function( error, data ) {
+		console.log( data );
+
+		// Did we get a response?
+		if ( data !== null ) {
+			// Add our song to our queue
+			playlist.addSong(data);
+
+			// Pass our track to our event subscribers
+			io.sockets.emit('track-added', data);
+
+			console.log(playlist.getSongs());
+
+			response.send(playlist.getSongs());
+		} else {
+			response.send(404);
+		}
 	});
+});
+
+app.get('/track/remove/:id', function(request, response) {
+	// Grab our params
+	var trackId = request.param.id;
+
+	// Remove our track from our playlist
+	playlist.removeSongAtIndex(trackId);
+
+	// Pass our event to our subscribers
+	io.sockets.emit('track-removed', trackId);
+
+	console.log(playlist.getSongs());
+
+	response.send(playlist.getSongs());
+});
+
+app.get('/track/complete', function(request, response) {
+	// Remove our track from our playlist
+	playlist.songFinished();
+
+	// Pass our event to our subscribers
+	io.sockets.emit('track-complete');
+
+	console.log(playlist.getSongs());
+
+	response.send(playlist.getSongs());
 });
 
 app.post('/voice/', function(request, response) {
@@ -138,8 +186,11 @@ app.post('/sms/reply/', function(request, response) {
 
 		// Did we get a response?
 		if ( data !== null ) {
+			// Add our song to our queue
+			playlist.addSong(data);
+
 			// Pass our track to our event subscribers
-			io.sockets.emit('track-create', data);
+			io.sockets.emit('track-added', data);
 
 			// Set our success message
 			var responseMessage = "Thanks for searching for " + searchParam + "! You just might hear your song soon. ;)";

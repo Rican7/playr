@@ -22,7 +22,7 @@ module.exports = function(twilio) {
 			twilio.sms.messages.post({
 				to: sender,
 				from: "+16032623095",
-				body: "Thanks for searching for " + body + "!"
+				body: body
 			}, function(error, data) {
 		        callback(error, data);
 			});
