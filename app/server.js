@@ -38,6 +38,16 @@ app.set('views', __dirname + '/views');
 console.log(__dirname + '/views');
 // app.register('.mustache', stache);
 
+var hbs = require('hbs');
+
+fs = require('fs')
+fs.readFile(__dirname + '/views/track.hbs', 'utf8', function (err,data) {
+  if (err) {
+    return console.log(err);
+  }
+	hbs.registerPartial('track', data);
+});
+
 
 // Socket.io
 var http = require('http')
