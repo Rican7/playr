@@ -16,6 +16,7 @@ var twilioClient = require('twilio')('ACceb22beac0d0c3ca5337f63739a1fbe3', 'f6a7
 // Internal libs
 var music = require('./lib/music.js')(rdio, Models);
 var sms = require('./lib/sms.js')(twilioClient);
+var playlist = new Models.queue();
 
 // Create our app
 var app = express.createServer(express.logger());
@@ -28,9 +29,36 @@ app.register('.mustache', stache);
 // Socket.io
 var io = require('socket.io').listen(app);
 
+io.sockets.on('connection', function (socket) {
+  socket.on('track-finish', function (data) {
+    playlist.songFinished(0);
+    playlist.getSongs( function (playlist) {
+      console.log(playlist);
+    });
+  });
+
+  socket.on('track-deny', function (songKey) {
+
+  });
+});
+
 app.get('/add-track', function (request, response) {
-  io.sockets.emit('track-create', {name: "eli"});
-  response.send(200);
+  music.getTrackByQuery( "darwin deez", function( error, data ) {
+    console.log( data );
+
+    // Did we get a response?
+    if ( data !== null ) {
+      io.sockets.emit('track-create', data);
+      playlist.addSong(data, function (vears) {
+        playlist.getSongs( function (playlist) {
+          console.log(playlist);
+        });
+      });
+      response.send(data);
+    } else {
+      response.send(404);
+    }
+  });
 });
 
 app.get('/', function(request, response) {
