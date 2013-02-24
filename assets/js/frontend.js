@@ -34,7 +34,7 @@
 		);
 
 		// Connect to our socket.io connection
-		socket = io.connect('http://playr.dev:5000'); // Connect to our own server
+		socket = io.connect(document.location.origin + ':5000'); // Connect to our own server
 
 		// When our Rdio client is ready...
 		$rdioEl.bind('ready.rdio', function(ev, userInfo) {
@@ -42,13 +42,56 @@
 			var trackTemplate = templates['template-track'];
 			var template = Handlebars.compile(trackTemplate);
 
+			// Create some bindings
+			$rdioEl.bind('playingTrackChanged.rdio', function(e, playingTrack, sourcePosition) {
+				console.log(playingTrack);
+				if (playingTrack) {
+					$('#currentArt').attr('src', playingTrack.icon);
+					$('#currentTrack').text(playingTrack.name);
+					$('#currentArtist').text(playingTrack.artist);
+				}
+			});
+
+			$('#next').click(function() {
+				// Play the next song
+				rdioControl.next();
+
+				// Grab our current key
+				$.getJSON( '/track/complete', function(data) {
+					//
+				});
+			});
+
+			$('#play_pause').click(function() {
+				console.log(rdioControl);
+				rdioControl.play();
+			});
+
+			// Grab our current key
+			$.getJSON( '/playlist', function(data) {
+				if (data.length > 0) {
+					for (var song in data) {
+						// Queue up our song
+						rdioControl.queue(data[song].key);
+
+						// // Render our template with our data
+						// var rendered = template( data[song] );
+
+						// // Append our track view to our playlist view
+						// $playlistEl.append( rendered );
+					}
+
+					// Play our first song
+					rdioControl.playQueuedTrack(0);
+				}
+			});
 
 			/**
 			 * Listen for our socket events
 			 */
 
 			// Track create
-			socket.on('track-create', function(data) {
+			socket.on('track-added', function(data) {
 				console.log(data);
 				rdioControl.queue(data.key);
 
@@ -59,32 +102,22 @@
 				$playlistEl.append( rendered );
 			});
 
-			socket.on('track-finish', function(data) {
-
+			// Track completed
+			socket.on('track-complete', function(data) {
+				//
 			});
 
 			// Track remove
-			socket.on('track-remove', function(data) {
+			socket.on('track-removed', function(data) {
 				console.log(data);
-				rdioControl.play(data.key);
+
+				// Remove from our queue
+				rdioControl.removeFromQueue(data);
+
+				// Remove the item from our visual playlist
+				$playlistEl.eq(data).remove();
 			});
 
-		$rdioEl.bind('playingTrackChanged.rdio', function(e, playingTrack, sourcePosition) {
-	        if (playingTrack) {
-	          $('#currentArt').attr('src', playingTrack.icon);
-	          $('#currentTrack').text(playingTrack.name);
-	          $('#currentArtist').text(playingTrack.artist);
-	        }
-        });
-
-        $('#next').click(function() {
-        	rdioControl.next();
-        });
-
-        $('#play_pause').click(function() {
-        	console.log(rdioControl);
-        	rdioControl.play();
-        });
 			// Test
 			// rdioControl.play('t2927188');
 
