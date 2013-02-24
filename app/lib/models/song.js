@@ -9,7 +9,7 @@ module.exports = function (json) {
 	this.album = "";
 	this.icon = "";
 	this.baseIcon = "";
-	this.duration = "";
+	this.duration = 0;
 
 	// Misc.	
 	this.albumKey = "";
