@@ -4,13 +4,24 @@
 	var playbackToken = null;
 	var rdioControl = null;
 	var socket = null;
+	var templates = {};
 
 	// Wait for our document to be ready
 	$(document).ready(function() {
 		// App-wide, jQuery dependent properties
 		var $rdioEl = $('#rdio-wrapper');
+		var $playlistEl = $('#playlist');
+		var $templateFiles = $('script[type="text/x-handlebars-template"]');
 
-		// First, let's get our playback token
+		// Load all of our templates
+		$templateFiles.each(function(idx, el) {
+			$.get(el.src, function(data) {
+				// Add our template data to our templates array
+				templates[el.id] = data;
+			});
+		});
+
+		// Let's get our playback token
 		$.getJSON( '/token?domain=' + document.location.hostname,
 			// Success callback
 			function(data) {
@@ -23,12 +34,33 @@
 		);
 
 		// Connect to our socket.io connection
-		socket = io.connect('/'); // Connect to our own server
+		socket = io.connect('http://playr.metroserve.me:5000'); // Connect to our own server
 
 		// When our Rdio client is ready...
 		$rdioEl.bind('ready.rdio', function(ev, userInfo) {
-			// Listen for a socket event
+			// Grab our track template and compile it
+			var trackTemplate = templates['template-track'];
+			var template = Handlebars.compile(trackTemplate);
+
+
+			/**
+			 * Listen for our socket events
+			 */
+
+			// Track create
 			socket.on('track-create', function(data) {
+				console.log(data);
+				rdioControl.play(data.key);
+
+				// Render our template with our data
+				var rendered = template( data );
+
+				// Append our track view to our playlist view
+				$playlistEl.append( rendered );
+			});
+
+			// Track remove
+			socket.on('track-remove', function(data) {
 				console.log(data);
 				rdioControl.play(data.key);
 			});
