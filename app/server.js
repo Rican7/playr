@@ -11,6 +11,7 @@ var Models = {
 var _ = require('underscore');
 var stache = require('stache');
 var rdio = require('./lib/rdio/rdio.js');
+var twilioClient = require('twilio')('ACceb22beac0d0c3ca5337f63739a1fbe3', 'f6a772f1a1094b582eec2a91f0454a70');
 
 // Internal libs
 var music = require('./lib/music.js')(rdio, Models);
@@ -24,8 +25,6 @@ app.use(express.static('assets'));
 app.set('view engine', 'mustache');
 app.set('view options', { layout: false });
 app.register('.mustache', stache);
-
-var twilioClient = require('twilio')('ACceb22beac0d0c3ca5337f63739a1fbe3', 'f6a772f1a1094b582eec2a91f0454a70');
 
 app.get('/', function(request, response) {
 	// response.send( 'hi!' );
