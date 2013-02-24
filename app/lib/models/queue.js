@@ -1,18 +1,25 @@
 module.exports = function () {
-	// Private properties
-	var current = 0;
-
 	// Public properties
- 	this.songs = [];
+ 	var upcomingSongs = [];
+ 	var playedSongs = [];
 
 	return {
 		addSong: function (song, callback) {
-			this.songs.push(song);
+			upcomingSongs.push(song);
 			callback(this);
 		},
-		removeSongAtIndex: function(index, callback) {
-			this.songs.splice(index, 1);
-			callback(this);
+
+		songFinished: function (index) {
+			playedSongs.push(upcomingSongs[0]);
+			removeSongAtIndex(0);
+		},
+
+		removeSongAtIndex: function(index) {
+			upcomingSongs.splice(index, 1);
+		},
+
+		getSongs: function (callback) {
+			callback(upcomingSongs);
 		}
 	};
 };
