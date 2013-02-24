@@ -28,6 +28,7 @@ var app = express();
 var cons = require('consolidate');
 app.use(express.bodyParser());
 app.use(express.static('assets'));
+app.use(express.static(__dirname + '/views/partials'));
 
 // assign the swig engine to .html files
 app.engine('handlebars', cons.handlebars);
@@ -41,7 +42,7 @@ console.log(__dirname + '/views');
 var hbs = require('hbs');
 
 fs = require('fs')
-fs.readFile(__dirname + '/views/track.hbs', 'utf8', function (err,data) {
+fs.readFile(__dirname + '/views/partials/track.hbs', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
