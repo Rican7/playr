@@ -65,8 +65,38 @@ module.exports = function(Rdio, Models) {
 				}
 			);
 		},
-		getTrack: function(query, callback) {
+		getTrackByQuery: function(query, callback) {
 			this.searchTrack(query, callback, true);
+		},
+		getTrackById: function(key, callback) {
+			// Search with our music service
+			this.serviceCall( 'get',
+				// Pass our params
+				{
+					keys: key
+				},
+				function(error, data) {
+					// Parse our results
+					if (typeof data.result !== 'undefined' && data.result !== null) {
+						// Set our result data to just our results
+						data = data.result;
+
+						// Do a really hilarious javascript check to see if this is an array
+						if (Object.prototype.toString.call( data ) === '[object Object]') {
+							// Get the first object
+							for (var keyName in data) {
+								data = data[keyName];
+								break;
+							}
+
+							data = new Models.track(data);
+						}
+					}
+
+					// Call our callback
+					callback(error, data);
+				}
+			);
 		}
 	};
 };

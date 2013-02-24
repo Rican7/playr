@@ -22,11 +22,23 @@ app.use(express.bodyParser());
 
 var twilioClient = require('twilio')('ACceb22beac0d0c3ca5337f63739a1fbe3', 'f6a772f1a1094b582eec2a91f0454a70');
 
-app.get('/', function(request, response) {
-  // Test our lib
-  music.getTrack( 'fader', function( error, data ) {
-	  response.send( data );
-  });
+app.get('/track/search', function(request, response) {
+	// Grab our params
+	var searchQuery = request.query.q || '';
+	var topOnly = typeof request.query.first !== 'undefined' ? true : false; // Make sure its boolean
+
+	music.searchTrack( searchQuery, function( error, data ) {
+		response.send( data );
+	}, topOnly);
+});
+
+app.get('/track/:key', function(request, response) {
+	// Grab our params
+	var trackKey = request.param('key') || '';
+
+	music.getTrackById( trackKey, function( error, data ) {
+		response.send( data );
+	});
 });
 
 app.post('/voice/', function(request, response) {
