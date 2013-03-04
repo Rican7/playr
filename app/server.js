@@ -73,7 +73,7 @@ io.configure(function () {
 });
 
 app.get('/', function(request, response) {
-	response.render('index');
+	response.render('index.hbs');
 });
 
 app.get('/play', function (request, response) {
