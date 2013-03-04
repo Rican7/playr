@@ -19,3 +19,7 @@ npm-debug.log
 # Node modules
 # (they should instead be added to our "package.json" file and "npm install"'d after a deploy/clone)
 /node_modules
+
+# Sass
+.sass-cache/
+bourbon/

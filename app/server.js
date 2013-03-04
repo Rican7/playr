@@ -66,6 +66,12 @@ io.sockets.on('connection', function (socket) {
   });
 });
 
+// assuming io is the Socket.IO server object
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
+});
+
 app.get('/', function(request, response) {
 	response.render('index');
 });
@@ -78,7 +84,7 @@ app.get('/play', function (request, response) {
 
 app.get('/token', function(request, response) {
 	// Create our domain option
-	var domain = request.query.host || 'playr.metroserve.me';
+	var domain = request.query.host || 'tufts-playr.herokuapp.com';
 
 	music.getPlaybackToken(domain, function( error, data ) {
 		response.send( data );
@@ -186,6 +192,7 @@ app.post('/sms/reply/', function(request, response) {
 
 		// Did we get a response?
 		if ( data !== null ) {
+			data.sender = sender;
 			// Add our song to our queue
 			playlist.addSong(data);
 

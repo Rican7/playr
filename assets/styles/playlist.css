@@ -43,6 +43,17 @@ body {
     #nav #logo span {
       color: RGBa(158, 202, 59, 0.9); }
 
+#number-display {
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  margin: 0px auto;
+  padding: 10px 0px;
+  width: 100%;
+  display: block;
+  line-height: 50px;
+  font-size: 36px; }
+
 #hidden {
   width: 260px;
   position: fixed;
@@ -94,7 +105,6 @@ body {
       -ms-transition: all 0.3s ease-in-out;
       -o-transition: all 0.3s ease-in-out;
       transition: all 0.3s ease-in-out;
-      -webkit-box-shadow: inset 0 -4px 30px 1px rgba(12, 12, 12, 0.95), inset 0 -1px 20px 1px RGBa(30, 30, 30, 0.9);
       box-shadow: inset 0 -4px 30px 1px rgba(12, 12, 12, 0.95), inset 0 -1px 20px 1px RGBa(30, 30, 30, 0.9); }
       #hidden #nav_buttons #nav_back:hover, #hidden #nav_buttons #nav_next:hover {
         background: #555; }
@@ -115,7 +125,6 @@ body {
       -ms-transition: all 0.3s ease-in-out;
       -o-transition: all 0.3s ease-in-out;
       transition: all 0.3s ease-in-out;
-      -webkit-box-shadow: inset 0 -4px 30px 1px rgba(12, 12, 12, 0.95), inset 0 -1px 20px 1px RGBa(30, 30, 30, 0.9);
       box-shadow: inset 0 -4px 30px 1px rgba(12, 12, 12, 0.95), inset 0 -1px 20px 1px RGBa(30, 30, 30, 0.9); }
       #hidden #nav_buttons #nav_play:hover {
         background: #555; }
@@ -143,7 +152,11 @@ body {
     color: #dddddd;
     display: block;
     margin-left: 30px;
-    float: left; }
+    float: left;
+    max-width: 580px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
     #current #info h2 {
       font-size: 30px;
       display: block;
@@ -178,7 +191,6 @@ body {
         -ms-transition: all 0.3s ease-in-out;
         -o-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
-        -webkit-box-shadow: inset 0 -4px 30px 1px rgba(12, 12, 12, 0.95), inset 0 -1px 20px 1px RGBa(30, 30, 30, 0.9);
         box-shadow: inset 0 -4px 30px 1px rgba(12, 12, 12, 0.95), inset 0 -1px 20px 1px RGBa(30, 30, 30, 0.9); }
         #current #buttons #left a:hover, #current #buttons #right a:hover {
           background: #555; }
@@ -205,7 +217,6 @@ body {
         -ms-transition: all 0.3s ease-in-out;
         -o-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
-        -webkit-box-shadow: inset 0 -6px 55px 1px RGBa(12, 12, 12, 0.95), inset 0 -1px 20px 3px RGBa(50, 50, 50, 0.5);
         box-shadow: inset 0 -6px 55px 1px RGBa(12, 12, 12, 0.95), inset 0 -1px 20px 3px RGBa(50, 50, 50, 0.5); }
         #current #buttons #center a:hover {
           background: #555; }
@@ -254,7 +265,10 @@ body {
         width: 400px;
         float: left;
         margin-left: 20px;
-        color: #dddddd; }
+        color: #dddddd;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; }
         #playlist li.list .track_info h3 {
           margin: 15px 0 5px 0;
           padding: 0;
