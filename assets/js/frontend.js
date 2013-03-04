@@ -34,7 +34,7 @@
 		);
 
 		// Connect to our socket.io connection
-		socket = io.connect(document.location.origin + ':5000'); // Connect to our own server
+		socket = io.connect(document.location.origin); // Connect to our own server
 
 		// When our Rdio client is ready...
 		$rdioEl.bind('ready.rdio', function(ev, userInfo) {
@@ -49,6 +49,7 @@
 					$('#currentArt').attr('src', playingTrack.icon);
 					$('#currentTrack').text(playingTrack.name);
 					$('#currentArtist').text(playingTrack.artist);
+					rdioControl.play();
 				}
 			});
 
@@ -82,7 +83,9 @@
 					}
 
 					// Play our first song
-					rdioControl.playQueuedTrack(0);
+					// rdioControl.playQueuedTrack(0);
+					rdioControl.play();
+
 				}
 			});
 

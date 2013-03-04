@@ -11,7 +11,10 @@ module.exports = function (json) {
 	this.baseIcon = "";
 	this.duration = 0;
 
-	// Misc.	
+	// Sender/Requester
+	this.sender = "+19999999999";
+
+	// Misc.		
 	this.albumKey = "";
 	this.albumUrl = "";
 	this.artistKey = "";
